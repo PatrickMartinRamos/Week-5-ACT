@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Deathfloorscript : MonoBehaviour
 {
@@ -16,5 +17,14 @@ public class Deathfloorscript : MonoBehaviour
             collision.gameObject.transform.position = playerRestartpos;
             Debug.Log("Die");
         }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Save the name of the current scene as the last scene
+            PlayerPrefs.SetString("LastScene", SceneManager.GetActiveScene().name);
+
+            // Load the Death Menu scene
+            SceneManager.LoadScene("Death Menu");
+        }
+
     }
 }
