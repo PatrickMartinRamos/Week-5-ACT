@@ -10,18 +10,15 @@ public class DiaScore : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Diamonds"))
         {
             Debug.Log("Player collided with diamond");
             score++;
             scoreText.text = "Score: " + score.ToString();
             Debug.Log("Score: " + score.ToString());
-
-            // Save the score
-            PlayerPrefs.SetInt("Score", score);
-            PlayerPrefs.Save();
-            Debug.Log("Score saved: " + score.ToString());
+            Destroy(other.gameObject);
         }
+        PlayerPrefs.SetInt("LastScore", score);
     }
 
     // Start is called before the first frame update
@@ -35,6 +32,25 @@ public class DiaScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // Save the score
+            PlayerPrefs.SetInt("Score", score);
+            PlayerPrefs.Save();
+            Debug.Log("Score saved: " + score.ToString());
 
+            // Quit the game
+            Application.Quit();
+        }
+  
+
+    }
+
+    private void OnApplicationQuit()
+    {
+        // Save the score
+        PlayerPrefs.SetInt("Score", score);
+        PlayerPrefs.Save();
+        Debug.Log("Score saved: " + score.ToString());
     }
 }
