@@ -29,23 +29,6 @@ public class DiaScore : MonoBehaviour
         Debug.Log("Score: " + score.ToString() + " loaded.");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            // Save the score
-            PlayerPrefs.SetInt("Score", score);
-            PlayerPrefs.Save();
-            Debug.Log("Score saved: " + score.ToString());
-
-            // Quit the game
-            Application.Quit();
-        }
-  
-
-    }
-
     private void OnApplicationQuit()
     {
         // Save the score
